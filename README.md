@@ -1,2 +1,0 @@
-# tallerIonic
-TallerIonic
