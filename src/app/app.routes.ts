@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
 
   {
-    path: '',
+    path: 'main',
     redirectTo:'main',
     pathMatch: 'full'
   },
@@ -28,9 +28,9 @@ export const routes: Routes = [
     path: 'notas',
     loadComponent: () => import('./notas/notas.page').then( m => m.NotasPage)
   },
-  
 
 
-   
+
+
 
 ];
