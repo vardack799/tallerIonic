@@ -1,7 +1,9 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { IonicModule} from '@ionic/angular';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IonicModule, AlertController } from '@ionic/angular';
+import { NotaService } from '../services/nota.service';
+import { Nota } from '../models/Nota';
 
 @Component({
   selector: 'app-crear-nota',
@@ -10,32 +12,43 @@ import { IonicModule} from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class CrearNotaPage {
-  nota: FormGroup;
+export class CrearNotaPage implements OnInit {
+  notaForm: FormGroup;
 
-
-  constructor() {
-    this.nota = new FormGroup({
+  constructor(private alertController: AlertController, private notaService: NotaService) {
+    this.notaForm = new FormGroup({
       descripcion: new FormControl('', Validators.required),
-      nota: new FormControl('',  [
+      nota: new FormControl('', [
         Validators.required,
         Validators.min(0),
         Validators.max(5),
-        Validators.pattern(/^\d+(\.\d{1,2})?$/) // Expresión regular para permitir hasta 2 decimales
+        Validators.pattern(/^\d+(\.\d{1,2})?$/)
       ]),
       observaciones: new FormControl('', Validators.required),
       fechaEntrega: new FormControl(new Date().toISOString(), Validators.required)
     });
   }
 
-  submitNota() {
-    // Lógica de envío del formulario aquí
-    if (this.nota.valid) {
-      // Lógica de envío del formulario aquí
-      console.log('Formulario enviado:', this.nota.value);
+  ngOnInit() {}
+
+  async submitNota() {
+    if (this.notaForm.valid) {
+      const notaValue: Nota = this.notaForm.value;
+      this.notaService.addNota(notaValue);
+      await this.presentAlert('Formulario enviado', JSON.stringify(notaValue));
+      this.notaForm.reset();
     } else {
-      console.log('Formulario no válido');
-    }  }
+      await this.presentAlert('Error', 'Formulario no válido');
+    }
+  }
 
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
 }

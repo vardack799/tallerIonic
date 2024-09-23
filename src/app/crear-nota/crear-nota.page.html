@@ -7,23 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <form [formGroup]="nota" (ngSubmit)="submitNota()">
+<ion-content >
+  <form [formGroup]="notaForm" (ngSubmit)="submitNota()">
     <ion-item>
-      <ion-label position="stacked">Descripción:</ion-label>
+      <ion-label position="floating">Descripción:</ion-label>
       <ion-input formControlName="descripcion" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Nota:</ion-label>
+      <ion-label position="floating">Nota:</ion-label>
       <ion-input formControlName="nota" type="number" required></ion-input>
     </ion-item>
-    <ion-item *ngIf="nota.get('nota')?.invalid && (nota.get('nota')?.dirty || nota.get('nota')?.touched)">
+    <ion-item *ngIf="notaForm.get('nota')?.invalid && (notaForm.get('nota')?.dirty || notaForm.get('nota')?.touched)">
       <ion-label color="danger">Por favor, ingresa una nota válida (entre 0 y 5 con hasta dos decimales separados por coma).</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Observaciones:</ion-label>
+      <ion-label position="floating">Observaciones:</ion-label>
       <ion-textarea formControlName="observaciones" required></ion-textarea>
     </ion-item>
 
@@ -37,6 +37,6 @@
       </ion-modal>
     </ion-item>
 
-    <ion-button type="submit" [disabled]="!nota.valid">Guardar Nota</ion-button>
+    <ion-button type="submit" [disabled]="!notaForm.valid">Guardar Nota</ion-button>
   </form>
 </ion-content>
