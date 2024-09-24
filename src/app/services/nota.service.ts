@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Nota } from '../models/Nota';
+import { Materia } from '../models/materia';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotaService {
   private notas: Nota[] = [];
+  private materias: Materia[] = [];
 
   constructor() {
     this.loadNotasFromStorage();
+    this.loadMateriasFromStorage();
   }
 
   private loadNotasFromStorage() {
@@ -18,12 +21,30 @@ export class NotaService {
     }
   }
 
-  getNotas(): Nota[] {
-    return this.notas;
+  private loadMateriasFromStorage() {
+    const storedMaterias = localStorage.getItem('materias');
+    if (storedMaterias) {
+      this.materias = JSON.parse(storedMaterias);
+    }
   }
 
-  addNota(nota: Nota) {
-    this.notas.push(nota);
-    localStorage.setItem('notas', JSON.stringify(this.notas));
+  getNotas(): Nota[] {//
+    return this.notas;//
+  }//
+
+  addNota(nota: Nota) {//
+    this.notas.push(nota);///
+    localStorage.setItem('notas', JSON.stringify(this.notas));//
+  }//
+
+  getMaterias(): Materia[] {
+    return this.materias;
   }
+
+  addMateria(materia: Materia) {
+    this.materias.push(materia);
+  }
+
+
+
 }

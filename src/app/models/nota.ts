@@ -3,4 +3,5 @@ export interface Nota {
   nota: number;
   observaciones: string;
   fechaEntrega: string;
+  materia:string;
 }

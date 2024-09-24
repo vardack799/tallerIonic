@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NotaService } from '../services/nota.service';
 import { Nota } from '../models/Nota';
+import { Materia } from '../models/materia';
 
 @Component({
   selector: 'app-notas',
@@ -15,11 +16,13 @@ import { Nota } from '../models/Nota';
 export class NotasPage implements OnInit {
 
   notas: Nota[] = [];
+  materias : Materia[] = [];
 
   constructor(private notaService: NotaService) {}
 
   ngOnInit() {
     this.notas = this.notaService.getNotas();
+
   }
 
 }

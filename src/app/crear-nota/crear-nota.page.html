@@ -10,6 +10,13 @@
 <ion-content >
   <form [formGroup]="notaForm" (ngSubmit)="submitNota()">
     <ion-item>
+      <ion-label position="inline">Materias Disponibles</ion-label>
+      <ion-select formControlName="materia" placeholder="Selecciona una materia" >
+        <ion-select-option *ngFor="let materia of materias" [value]="materia.nombre">{{ materia.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="floating">Descripción:</ion-label>
       <ion-input formControlName="descripcion" required></ion-input>
     </ion-item>
@@ -36,7 +43,8 @@
         </ng-template>
       </ion-modal>
     </ion-item>
-
+    <div class="ion-button-container">
     <ion-button type="submit" [disabled]="!notaForm.valid">Guardar Nota</ion-button>
+    </div>
   </form>
 </ion-content>

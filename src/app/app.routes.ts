@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-
   {
     path: 'main', loadComponent:  () => import('./main/main.page').then(m => m.MainPage)},
 {
@@ -10,10 +9,6 @@ export const routes: Routes = [
     redirectTo:'main',
     pathMatch: 'full'
 },
-  {
-    path: 'materias',
-    loadComponent: () => import('./materias/materias.page').then( m => m.MateriasPage)
-  },
   {
     path: 'crear-materia',
     loadComponent: () => import('./crear-materia/crear-materia.page').then( m => m.CrearMateriaPage)
@@ -26,6 +21,7 @@ export const routes: Routes = [
     path: 'notas',
     loadComponent: () => import('./notas/notas.page').then( m => m.NotasPage)
   },
+
 
 
 
