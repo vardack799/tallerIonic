@@ -1,3 +1,5 @@
+import { Nota } from "./nota";
+
 export interface Materia {
   nombre: string;
   semestre: string;

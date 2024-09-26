@@ -1,21 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+IonList,
+IonItem,
+IonLabel,} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonMenuButton,
+    CommonModule,
+    FormsModule]
 })
 export class MainPage implements OnInit {
 
+
   constructor() { }
 
-  ngOnInit() {
-  }
+   ngOnInit() {
 
+  }
 }
