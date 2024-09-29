@@ -1,0 +1,10 @@
+import { Nota } from "./nota";
+
+export interface Materia {
+  nombre: string;
+  semestre: string;
+  codigo: string;
+  horario: string;
+  observaciones?: string;
+  notas?: Nota[];
+}

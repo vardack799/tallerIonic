@@ -16,6 +16,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     importProvidersFrom(IonicStorageModule.forRoot()),
+
   ],
 });
-
