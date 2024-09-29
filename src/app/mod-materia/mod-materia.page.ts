@@ -1,7 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonButton, IonButtons, IonMenuButton, IonCard, IonCardContent, IonInput, IonLabel, IonItem } from '@ionic/angular/standalone';
+import { IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonMenu,
+  IonButton,
+  IonButtons,
+  IonMenuButton,
+  IonCard,
+  IonCardContent,
+  IonInput,
+  IonLabel,
+  IonItem,
+IonText } from '@ionic/angular/standalone';
 import { AppStorageService } from '../services/app-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -25,6 +38,7 @@ import { AlertController } from '@ionic/angular';
     IonInput,
     IonLabel,
     IonItem,
+    IonText,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -52,10 +66,11 @@ export class ModMateriaPage implements OnInit {
       if (this.materiaActual) {
         this.modMateria = this.fb.group({
           nombre: [this.materiaActual.nombre, Validators.required],
-          semestre: [this.materiaActual.semestre, Validators.required],
+          semestre: [this.materiaActual.semestre,[Validators.required, Validators.min(1), Validators.max(12)]],
           codigo: [this.materiaActual.codigo, Validators.required],
           horario: [this.materiaActual.horario, Validators.required],
           observaciones: [this.materiaActual.observaciones || ''],
+
         });
       } else {
         this.router.navigate(['/listado-materias']);
@@ -64,6 +79,8 @@ export class ModMateriaPage implements OnInit {
       this.router.navigate(['/listado-materias']);
     }
   }
+
+
 
   async guardarCambios() {
     if (this.modMateria.valid) {

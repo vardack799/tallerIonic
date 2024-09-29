@@ -25,6 +25,11 @@ export const routes: Routes = [
     path: 'mod-materia/:codigo',
     loadComponent: () => import('./mod-materia/mod-materia.page').then( m => m.ModMateriaPage)
   },
+  {
+    path: 'agregar-nota/:codigoMateria',
+    loadComponent: () => import('./agregar-nota/agregar-nota.page').then( m => m.AgregarNotaPage)
+  },
+
 
 
 

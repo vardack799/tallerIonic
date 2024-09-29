@@ -22,7 +22,99 @@
     <div class="ion-text-vertical ion-text-right">
       <ion-button class="ion-margin-bottom" [routerLink]="['/mod-materia', materia.codigo]">Modificar Materia</ion-button>
       <ion-button class="ion-margin-bottom" (click)="eliminarMateria(materia.codigo)">Eliminar Materia</ion-button>
-      <ion-button class="ion-margin-bottom" >Agregar Notas</ion-button>
+      <ion-button class="ion-margin-bottom" [routerLink]="['/agregar-nota', materia.codigo]">Agregar Notas</ion-button>
     </div>
   </ion-card>
-</ion-content>
+
+<!--
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Notas de la Materia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+
+    <ion-item>
+      <ion-label>Materia Seleccionada</ion-label>
+      <ion-select [(ngModel)]="selectedMateria" (ionChange)="loadNotas()">
+        <ion-select-option *ngFor="let materia of materias" [value]="materia">{{ materia.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+     Formulario para agregar notas
+    <ion-card *ngIf="selectedMateria">
+      <ion-card-header>
+        <ion-card-title>Agregar Nota a {{ selectedMateria.nombre }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form (ngSubmit)="agregarNota()">
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input [(ngModel)]="nota.descripcion" name="descripcion" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Fecha de Entrega</ion-label>
+            <ion-datetime [(ngModel)]="nota.fechaEntrega" name="fechaEntrega" display-format="DD/MM/YYYY"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nota</ion-label>
+            <ion-input [(ngModel)]="nota.valor" name="valor" type="number" min="0" max="5" step="0.01" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Observaciones</ion-label>
+            <ion-textarea [(ngModel)]="nota.observaciones" name="observaciones"></ion-textarea>
+          </ion-item>
+
+          <ion-button expand="block" type="submit">Agregar Nota</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+
+
+
+
+  <ion-item>
+    <ion-label>Materia</ion-label>
+    <ion-select [(ngModel)]="selectedMateria" (ionChange)="loadNotas()">
+      <ion-select-option *ngFor="let materia of materias" [value]="materia.id">{{ materia.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Agregar Nota</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form >
+        <ion-item>
+          <ion-label>Corte</ion-label>
+          <ion-select >
+            <ion-select-option value="Primer 20%">Primer 20%</ion-select-option>
+            <ion-select-option value="Segundo 20%">Segundo 20%</ion-select-option>
+            <ion-select-option value="Tercer 20%">Tercer 20%</ion-select-option>
+            <ion-select-option value="40% Final">40% Final</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nota</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit" >Agregar Nota</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card> -->
+
+    <ng-container *ngIf="materias.length === 0">
+      <p>No hay materias registradas.</p>
+      <ion-button [routerLink]="['/registro-materia']">Volver</ion-button>
+    </ng-container>
+    <!-- Lista de materias -->
+    <ion-list *ngIf="materias.length > 0">
+      <!-- Items de la lista -->
+    </ion-list>
+  </ion-content>

@@ -15,7 +15,7 @@
   </ion-header>
 
 
-  <ion-content *ngIf="modMateria"> <!-- Asegúrate de que modMateria esté definido -->
+  <ion-content *ngIf="modMateria" > <!-- Asegúrate de que modMateria esté definido -->
     <form [formGroup]="modMateria">
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
@@ -24,8 +24,13 @@
 
       <ion-item>
         <ion-label position="floating">Semestre</ion-label>
-        <ion-input formControlName="semestre"></ion-input>
+        <ion-input formControlName="semestre" type="number"></ion-input>
       </ion-item>
+      <div *ngIf="modMateria.get('semestre')?.invalid && modMateria.get('semestre')?.touched">
+        <ion-text color="danger">
+          <p>El semestre debe estar entre 1 y 12.</p>
+        </ion-text>
+      </div>
 
       <ion-item>
         <ion-label position="floating">Código</ion-label>

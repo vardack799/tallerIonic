@@ -1,7 +1,7 @@
 export interface Nota {
   descripcion: string;
-  nota: number;
-  observaciones: string;
   fechaEntrega: string;
-  materia:string;
+  valor: number;
+  observaciones: string;
+  corte: string;
 }

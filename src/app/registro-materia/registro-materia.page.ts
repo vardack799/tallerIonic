@@ -49,6 +49,7 @@ export class RegistroMateriaPage implements OnInit {
   materiaForm: FormGroup;
   materias: Materia[] = [];
 
+
   constructor(
     private alertController: AlertController,
     private appStorageService: AppStorageService,
@@ -68,15 +69,19 @@ export class RegistroMateriaPage implements OnInit {
 
   async submitMateria() {
     if (this.materiaForm.valid) {
-      const nuevaMateria: Materia = this.materiaForm.value;
-      await this.appStorageService.addMateria(nuevaMateria);
-      this.presentAlert('Registro Exitoso', 'La materia ha sido registrada con éxito.');
-      this.materiaForm.reset();
-      this.loadMaterias(); // Actualiza la lista de materias 
+      try {
+        const nuevaMateria: Materia = this.materiaForm.value;
+        await this.appStorageService.addMateria(nuevaMateria);
+        this.presentAlert('Registro Exitoso', 'La materia ha sido registrada con éxito.');
+        this.materiaForm.reset();
+        this.loadMaterias();
+      } catch (error) {
+        this.presentAlert('Error', 'Ha ocurrido un error al registrar la materia.');
+      }
+    } else {
       this.presentAlert('Error', 'Por favor, completa todos los campos requeridos.');
     }
   }
-
 
   async loadMaterias() {
     this.materias = await this.appStorageService.getMaterias();
@@ -87,7 +92,14 @@ export class RegistroMateriaPage implements OnInit {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.loadMaterias(); // Recargar la página
+          }
+        }
+      ]
     });
 
     await alert.present();

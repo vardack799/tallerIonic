@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Materia } from '../models/materia';
+import { Nota } from '../models/nota';
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +54,24 @@ export class AppStorageService {
     materias = materias.filter((materia: Materia) => materia.codigo !== codigo);
     await this.setMaterias(materias);
   }
+
+  async addNota(codigoMateria: string, nota: Nota, corte: string) {
+    const materias = await this.getMaterias();
+    const materia = materias.find((materia: Materia) => materia.codigo === codigoMateria);
+    if (materia) {
+      if (!materia.notas) {
+        materia.notas = {
+          primer20: [],
+          segundo20: [],
+          tercer20: [],
+          cuarentaFinal: [],
+        };
+      }
+      const corteKey = corte as keyof typeof materia.notas;
+      materia.notas[corteKey].push(nota);
+      await this.setMaterias(materias);
+    }
+  }
+
+ 
 }

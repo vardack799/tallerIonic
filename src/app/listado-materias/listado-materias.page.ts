@@ -16,8 +16,12 @@ import { IonContent,
     IonButtons,
     IonMenuButton,
     IonButton,
+    IonInput,
+    IonSelectOption,
+    IonSelect,
+    AlertController,
   } from '@ionic/angular/standalone';
-  import { RouterLink} from '@angular/router';
+  import {   RouterLink} from '@angular/router';
 import { Materia } from '../models/materia';
 import { AppStorageService } from '../services/app-storage.service';
 
@@ -41,6 +45,7 @@ import { AppStorageService } from '../services/app-storage.service';
       IonButtons,
       IonMenuButton,
       IonButton,
+
       RouterLink,
        CommonModule, FormsModule]
 })
@@ -48,14 +53,43 @@ export class ListadoMateriasPage implements OnInit {
 
   materias: Materia[] = [];
 
-  constructor(private appStorageService: AppStorageService) { }
+
+  constructor(private appStorageService: AppStorageService,
+    private  alertController: AlertController,
+     ) { }
+
 
   async ngOnInit() {
     await this.appStorageService.init();
     this.materias = await this.appStorageService.getMaterias();
+
+
   }
   async eliminarMateria(codigo: string) {
-    await this.appStorageService.removeMateriaByCodigo(codigo);
-    this.materias = await this.appStorageService.getMaterias();
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: `¿Estás seguro de eliminar la materia con código ${codigo}?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancelar eliminación');
+          }
+        }, {
+          text: 'Eliminar',
+          handler: async () => {
+            this.appStorageService.removeMateriaByCodigo(codigo);
+            this.materias = await this.appStorageService.getMaterias();
+            location.reload();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
   }
+
 }
