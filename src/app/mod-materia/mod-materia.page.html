@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>mod-materia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">mod-materia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content *ngIf="modMateria"> <!-- Asegúrate de que modMateria esté definido -->
+    <form [formGroup]="modMateria">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Semestre</ion-label>
+        <ion-input formControlName="semestre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Código</ion-label>
+        <ion-input formControlName="codigo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Horario</ion-label>
+        <ion-input formControlName="horario"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Observaciones</ion-label>
+        <ion-input formControlName="observaciones"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit" (click)="guardarCambios()" >Guardar Cambios</ion-button>
+    </form>
+  </ion-content>
+

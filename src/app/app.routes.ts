@@ -8,7 +8,8 @@ export const routes: Routes = [
     path: '',
     redirectTo:'main',
     pathMatch: 'full'
-},  {
+},
+  {
     path: 'main',
     loadComponent: () => import('./main/main.page').then( m => m.MainPage)
   },
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'listado-materias',
     loadComponent: () => import('./listado-materias/listado-materias.page').then( m => m.ListadoMateriasPage)
+  },
+  {
+    path: 'mod-materia/:codigo',
+    loadComponent: () => import('./mod-materia/mod-materia.page').then( m => m.ModMateriaPage)
   },
 
 

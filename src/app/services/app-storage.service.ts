@@ -32,4 +32,25 @@ export class AppStorageService {
     materias.push(materia);
     await this.setMaterias(materias);
   }
+
+  async updateMateria(codigo: string, nuevaMateria: Materia): Promise<boolean> {
+    const materias = await this.getMaterias();
+    const index = materias.findIndex((materia: Materia) => materia.codigo === codigo);
+    if (index > -1) {
+      materias[index] = nuevaMateria;
+      await this.setMaterias(materias);
+      return true;
+    }
+    return false;
+  }
+
+  async getMateriaByCodigo(codigo: string): Promise<Materia | null> {
+    const materias = await this.getMaterias();
+    return materias.find((materia: Materia) => materia.codigo === codigo) || null;
+  }
+  async removeMateriaByCodigo(codigo: string) {
+    let materias = await this.getMaterias();
+    materias = materias.filter((materia: Materia) => materia.codigo !== codigo);
+    await this.setMaterias(materias);
+  }
 }

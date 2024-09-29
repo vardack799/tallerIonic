@@ -72,8 +72,7 @@ export class RegistroMateriaPage implements OnInit {
       await this.appStorageService.addMateria(nuevaMateria);
       this.presentAlert('Registro Exitoso', 'La materia ha sido registrada con éxito.');
       this.materiaForm.reset();
-      this.loadMaterias(); // Actualiza la lista de materias después de agregar una nueva
-    } else {
+      this.loadMaterias(); // Actualiza la lista de materias 
       this.presentAlert('Error', 'Por favor, completa todos los campos requeridos.');
     }
   }

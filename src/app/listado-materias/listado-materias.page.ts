@@ -8,7 +8,16 @@ import { IonContent,
     IonItem,
     IonList,
     IonLabel,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonButtons,
+    IonMenuButton,
+    IonButton,
   } from '@ionic/angular/standalone';
+  import { RouterLink} from '@angular/router';
 import { Materia } from '../models/materia';
 import { AppStorageService } from '../services/app-storage.service';
 
@@ -24,6 +33,15 @@ import { AppStorageService } from '../services/app-storage.service';
       IonItem,
       IonList,
       IonLabel,
+      IonCard,
+      IonCardHeader,
+      IonCardTitle,
+      IonCardSubtitle,
+      IonCardContent,
+      IonButtons,
+      IonMenuButton,
+      IonButton,
+      RouterLink,
        CommonModule, FormsModule]
 })
 export class ListadoMateriasPage implements OnInit {
@@ -33,8 +51,11 @@ export class ListadoMateriasPage implements OnInit {
   constructor(private appStorageService: AppStorageService) { }
 
   async ngOnInit() {
+    await this.appStorageService.init();
     this.materias = await this.appStorageService.getMaterias();
   }
-
-
+  async eliminarMateria(codigo: string) {
+    await this.appStorageService.removeMateriaByCodigo(codigo);
+    this.materias = await this.appStorageService.getMaterias();
+  }
 }
